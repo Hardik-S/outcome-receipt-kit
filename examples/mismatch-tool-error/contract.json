@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "assertions": [
+    {"id": "wrong-id", "event": "create_issue", "pointer": "/id", "equals": "SYN-42"},
+    {"id": "failed-update", "event": "update_issue", "pointer": "/state", "equals": "closed"}
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "events": [
+    {"event": "create_issue", "status": "ok", "result": {"id": "SYN-42"}}
+  ]
+}

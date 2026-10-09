@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "assertions": [
+    {"id": "issue-created", "event": "create_issue", "pointer": "/id", "equals": "SYN-42"}
+  ]
+}

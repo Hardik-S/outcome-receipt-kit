@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "events": [
+    {"event": "create_issue", "status": "ok", "result": {"id": "SYN-41"}},
+    {"event": "update_issue", "status": "error", "error": "synthetic provider failure"}
+  ]
+}

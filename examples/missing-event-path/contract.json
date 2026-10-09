@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "assertions": [
+    {"id": "absent-event", "event": "create_issue", "pointer": "/id", "equals": "SYN-42"},
+    {"id": "absent-path", "event": "comment_issue", "pointer": "/id", "equals": "CMT-7"}
+  ]
+}
