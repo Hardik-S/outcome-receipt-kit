@@ -49,6 +49,23 @@ def test_rfc6901_escape_decoding(key, pointer):
     assert check_contract(contract, evidence)[0]["status"] == "verified"
 
 
+def test_array_pointer_and_present_null_are_distinct_from_missing_pointer():
+    contract = {"version": 1, "assertions": [
+        {"id": "array", "event": "read", "pointer": "/items/1", "equals": "found"},
+        {"id": "null", "event": "read", "pointer": "/nullable", "equals": None},
+        {"id": "missing", "event": "read", "pointer": "/absent", "equals": None},
+    ]}
+    evidence = {"version": 1, "events": [
+        {"event": "read", "status": "ok", "result": {
+            "items": ["other", "found"], "nullable": None,
+        }}
+    ]}
+    results = check_contract(contract, evidence)
+    assert [item["status"] for item in results] == [
+        "verified", "verified", "missing_evidence",
+    ]
+
+
 @pytest.mark.parametrize("value", [False, 0, None])
 def test_json_scalar_equality_is_exact(value):
     contract = {"version": 1, "assertions": [
@@ -73,6 +90,8 @@ def test_json_scalar_mismatches_are_exact(expected, observed):
 
 @pytest.mark.parametrize("contract,evidence", [
     ({"version": True, "assertions": []}, {"version": 1, "events": []}),
+    ({"version": 1.0, "assertions": []}, {"version": 1, "events": []}),
+    ({"version": 1, "assertions": []}, {"version": 1.0, "events": []}),
     ({"version": 2, "assertions": []}, {"version": 1, "events": []}),
     ({"version": 1, "assertions": [
         {"id": "x", "event": "e", "pointer": "/x~2", "equals": 1}

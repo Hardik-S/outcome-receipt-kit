@@ -14,7 +14,7 @@ def _object(value: Any, label: str) -> dict[str, Any]:
 
 
 def _version(value: Any, label: str) -> None:
-    if isinstance(value, bool) or value != 1:
+    if type(value) is not int or value != 1:
         raise ValueError(f"{label}.version must be the supported integer 1")
 
 
